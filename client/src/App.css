@@ -1,0 +1,388 @@
+/* --Global-- */
+:root {
+  --black: #0b0c10;
+  --dark: #1f2833;
+  --light: #c5c6c7;
+  --white: #ebebeb;
+  --bright: #66fcf1;
+  --teal: #45a29e;
+  --grey: #777777;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  font-family: 'Alata', sans-serif;
+  font-size: 1rem;
+  line-height: 1.6;
+  background-color: var(--grey);
+  display: grid;
+  justify-content: center;
+  align-items: center;
+}
+
+/* text */
+.heading-txt {
+  color: var(--teal);
+}
+.main-txt {
+  color: var(--light);
+}
+.accent-txt {
+  color: var(--bright);
+}
+
+/* buttons */
+.btn {
+  display: inline-block;
+  padding: 0.4rem 1.3rem;
+  font-size: 1rem;
+  border: none;
+  cursor: pointer;
+  margin-right: 0.5rem;
+  outline: none;
+}
+.btn:hover {
+  background: var(--bright);
+  color: var(--dark);
+}
+.btn:active {
+  background: var(--teal);
+}
+.btn-large {
+  width: 180px;
+  font-size: 1.3em;
+}
+
+/* input */
+
+input,
+textarea {
+  display: block;
+  width: 100%;
+  padding: 0.4rem;
+  margin: 0.2rem;
+  font-size: 1.2rem;
+  border: 1px solid #ccc;
+}
+
+/* component specific */
+.App {
+  width: 820px;
+  height: 780px;
+  padding: 10px;
+  /* border-radius: 10px;
+  background-color: var(--light);
+  box-shadow: 0px 0px 20px var(--teal); */
+}
+
+/* landing page */
+
+.landing {
+  height: 100%;
+  width: 100%;
+  border-radius: inherit;
+
+  display: grid;
+  grid-template-rows: 45% 10% 45%;
+  grid-template-areas:
+    't t t t t'
+    'd d d d d'
+    'x x x x x';
+}
+
+.landing .divider {
+  grid-area: d;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  font-size: 3em;
+  letter-spacing: 6px;
+}
+
+.divider::before,
+.divider::after {
+  content: '';
+  flex: 1;
+  border-bottom: 1px solid #000;
+}
+.divider::before {
+  margin-right: 0.25em;
+}
+.divider::after {
+  margin-left: 0.25em;
+}
+.divider span {
+  color: var(--teal);
+  font-weight: bolder;
+  font-size: 1.3em;
+  letter-spacing: 0px;
+}
+
+.login-container {
+  grid-area: t;
+
+  display: flex;
+
+  justify-content: space-around;
+}
+
+.login-container > div {
+  width: 50%;
+
+  display: grid;
+  place-content: center;
+}
+
+.login-right .btn {
+  width: 90px;
+  margin: auto;
+  margin-top: 7px;
+}
+.login-left .btn {
+  font-size: 1.7em;
+}
+
+.login-left {
+  border-right: 1px solid black;
+}
+.login-right {
+  border-left: 1px solid black;
+}
+
+/* Dashboard */
+
+.task-container {
+  position: relative;
+  height: 100%;
+  display: grid;
+  grid-template-rows: 8% 92%;
+  grid-template-columns: 20% 40% 40%;
+  grid-template-areas:
+    'f a g'
+    'm m m';
+}
+
+.grid-fill {
+  grid-area: a;
+  display: grid;
+  border-bottom: 2px solid black;
+  place-content: center;
+}
+
+.task-filter {
+  grid-area: f;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+}
+
+.task-filter::before,
+.task-filter::after {
+  content: '';
+  flex: 1;
+  border-bottom: 2px solid #000;
+}
+
+.task-filter p {
+  font-size: 1.1em;
+  padding: 5px;
+  margin-top: -100px;
+  border-radius: 4px 4px 0 0;
+  border-top: 2px solid black;
+  border-left: 2px solid black;
+  border-right: 2px solid black;
+  background: var(--light);
+}
+
+.task-filter p:hover {
+  cursor: pointer;
+}
+
+p.inactive {
+  border-bottom: 2px solid black;
+  background: var(--grey);
+  color: var(--light);
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(128, 128, 128, 0.5);
+  z-index: 3;
+}
+
+.add-task-form {
+  position: absolute;
+
+  top: 30%;
+  left: calc(50% - 250px);
+  width: 500px;
+  background: var(--white);
+  border-radius: 7px;
+  padding: 8px;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.add-task-form input[type='submit'] {
+  width: 200px;
+}
+
+.add-task-form textarea {
+  resize: none;
+}
+
+.add-task {
+  position: relative;
+  z-index: 3;
+  cursor: pointer;
+}
+
+.add-task-btn {
+  width: 50px;
+  height: 50px;
+
+  border: var(--teal);
+  background: var(--grey);
+
+  display: grid;
+  transition: all 0.5s;
+}
+
+.add-task-btn:hover {
+  background: var(--teal);
+}
+
+.add-task-btn.active {
+  border-radius: 25px;
+  transform: rotate(45deg);
+  margin-left: 75px;
+  background: var(--teal);
+}
+
+.plus-l {
+  position: relative;
+  width: 4px;
+  height: 30px;
+  bottom: -10px;
+  left: calc(50% - 2px);
+  background: black;
+}
+
+.plus-r {
+  position: relative;
+  width: 30px;
+  height: 4px;
+  left: calc(50% - 15px);
+  bottom: 15px;
+  background: black;
+}
+
+.greeting {
+  grid-area: g;
+  border-bottom: 2px solid #000;
+
+  display: flex;
+  justify-content: flex-end;
+}
+
+.greeting h2 {
+  padding: 7px;
+}
+
+.greeting h2 span {
+  color: var(--teal);
+}
+
+.tasks {
+  background: var(--light);
+  grid-area: m;
+  border-bottom: 2px solid black;
+  border-left: 2px solid black;
+  border-right: 2px solid black;
+
+  position: relative;
+}
+
+.task {
+  margin: 12px;
+  border: 1px solid var(--teal);
+  border-radius: 5px;
+
+  height: auto;
+
+  display: flex;
+  flex-direction: column;
+
+  position: relative;
+}
+
+.task:hover {
+  border-radius: 5px 5px 0 0;
+}
+
+.task:hover .task-sub {
+  height: 100px;
+}
+
+.task-main {
+  display: flex;
+  justify-content: space-between;
+
+  background: var(--teal);
+  padding: 7px;
+  z-index: 2;
+}
+
+.task-title {
+}
+
+.task-date {
+}
+
+.task-sub {
+  display: flex;
+  z-index: 1;
+  background-color: var(--white);
+  overflow: hidden;
+  width: 100%;
+  height: 0;
+
+  transition: 0.5s ease;
+}
+
+.task-desc {
+  margin: 7px;
+  flex: 4;
+}
+
+.task-sub button {
+  margin: 7px;
+  flex: 1;
+  height: 30px;
+  width: 20px;
+}
+
+/* Mobile Styles */
+@media (max-width: 700px) {
+  .App {
+    height: 100%;
+    width: 100vw;
+    max-width: 100vw;
+    padding: 0;
+  }
+}
