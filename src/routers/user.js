@@ -7,12 +7,11 @@ const { sendWelcomeEmail, sendCancelationEmail } = require('../emails/account');
 const router = new express.Router();
 
 router.post('/users', async (req, res) => {
-  // console.log(req.body);
   const user = new User(req.body);
 
   try {
     await user.save();
-    // sendWelcomeEmail(user.email, user.name)
+    sendWelcomeEmail(user.email, user.name);
     const token = await user.generateAuthToken();
     res.status(201).send({ user, token });
   } catch (e) {
@@ -21,7 +20,6 @@ router.post('/users', async (req, res) => {
 });
 
 router.post('/users/login', async (req, res) => {
-  // console.log(req.body)
   try {
     const user = await User.findByCredentials(
       req.body.email,
